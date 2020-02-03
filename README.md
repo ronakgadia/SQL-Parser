@@ -7,7 +7,7 @@ It does the lexical analysis by generating tokens in the flex file. These tokens
 To run the file on terminal, use the following commnands:-
 ```
 $ lex flex.l
-$ yacc -d bison.y
+$ yacc -d parse.y
 $ gcc y.tab.c -ll -ly
 $ ./a.out
 ```
