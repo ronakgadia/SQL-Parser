@@ -80,8 +80,8 @@ void printTree(struct Node* root,int level);
 program 	: database_stmt ';' 	{ 	
 						$$ = makeNode("program");
 						$$->child = $1;
-						printf("\n\n\t\t\tParsing tree\n");
-						printf("\t\t\t------------\n");
+						printf("\n\n\t\t\t\t\t\tParsing tree\n");
+						printf("\t\t\t\t\t\t------------\n");
 						printTree($$,0);
 						printf("INPUT ACCEPTED.... \n");
 						exit(0);
@@ -89,8 +89,8 @@ program 	: database_stmt ';' 	{
 		| table_stmt ';'	{ 
 						$$ = makeNode("program");
 						$$->child = $1;
-						printf("\n\n\t\t\tParsing tree\n");
-						printf("\t\t\t------------\n");
+						printf("\n\n\t\t\t\t\t\tParsing tree\n");
+						printf("\t\t\t\t\t\t------------\n");
 						printTree($$,0);
 						printf("INPUT ACCEPTED.... \n");
 						exit(0);
@@ -734,9 +734,22 @@ void printTree(struct Node* root,int level)
 {
 	if(root==NULL)
 		return;
+	if(root->child==NULL && root->str[0] >= 97 && root->str[0]<=122)
+		return;
 	for(int i=0;i<level;i++)
 		printf("	");
-	printf("-%s\n",root->str);
+	if( root->str[0] >= 65 && root->str[0]<=90)
+	{
+		printf("\033[01;33m");
+		printf("-%s\n",root->str);
+		printf("\033[0m");
+	}
+	else
+	{
+		printf("\033[0;32m");
+		printf("-%s\n",root->str);
+		printf("\033[0m");
+	}
 	if(root->child!=NULL)
 	{
 		root = root->child;
